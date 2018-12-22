@@ -1,0 +1,7 @@
+# initialize
+/run/initialize
+
+# photons 662 keV 
+/gun/particle photon
+/gun/energy 662 keV
+/run/beamOn 100

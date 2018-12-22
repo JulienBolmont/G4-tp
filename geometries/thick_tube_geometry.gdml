@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<gdml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://service-spi.web.cern.ch/service-spi/app/releases/GDML/schema/gdml.xsd">
+
+  <define>
+    <position name="detPosition" x="0" y="0" z="0" unit="cm"/>
+  </define>
+
+  <materials>
+
+    <element name="NITROGEN_elm" formula="N" Z="7">
+      <atom unit="g/mole" value="14.00674"/>
+    </element>
+    <element name="OXYGEN_elm" formula="O" Z="8">
+      <atom unit="g/mole" value="15.9994"/>
+    </element>
+    <element name="CARBON_elm" formula="C" Z="6">
+      <atom unit="g/mole" value="12.0107"/>
+    </element>
+    <element name="ARGON_elm" formula="AR" Z="18">
+      <atom unit="g/mole" value="39.948"/>
+    </element>
+
+    <material name="AIR">
+      <D unit="g/cm3" value="1.29"/>
+      <fraction n="0.0128784598783" ref="ARGON_elm"/>
+      <fraction n="0.000140353804454" ref="CARBON_elm"/>
+      <fraction n="0.75520581007" ref="NITROGEN_elm"/>
+      <fraction n="0.231775507331" ref="OXYGEN_elm"/>
+    </material>
+
+    <material name="VACUUM">
+      <D unit="g/cm3" value="1.E-25"/>
+      <fraction n="0.0128784598783" ref="ARGON_elm"/>
+      <fraction n="0.000140353804454" ref="CARBON_elm"/>
+      <fraction n="0.75520581007" ref="NITROGEN_elm"/>
+      <fraction n="0.231775507331" ref="OXYGEN_elm"/>
+    </material>
+
+    <element name="SODIUM_elm" formula="NA" Z="11">
+      <atom unit="g/mole" value="22.98977"/>
+    </element>
+    <element name="IODINE_elm" formula="I" Z="53">
+      <atom unit="g/mole" value="126.90447"/>
+    </element>
+
+    <material name="NAI">
+      <D unit="g/cm3" value="3.67"/>
+      <fraction n="0.84662681818" ref="IODINE_elm"/>
+      <fraction n="0.153373301029" ref="SODIUM_elm"/>
+    </material>
+
+  </materials>
+
+  <solids>
+    <box name="TopSolid" x="100" y="100" z="100" lunit="cm"/>
+    <tube name="ThickNaITubeSolid" rmin="0.5" rmax="50" z="50" startphi="0" deltaphi="360" aunit="deg" lunit="cm"/>
+  </solids>
+
+  <structure>
+    
+    <volume name="ThickNaITubeSolidVolume">
+      <materialref ref="NAI"/>
+      <solidref ref="ThickNaITubeSolid"/>
+      <auxiliary auxtype="Color" auxvalue="cyan"/>
+      <auxiliary auxtype="Resolution" auxvalue="0.08"/>
+    </volume>
+    
+    <volume name="Top">
+      <materialref ref="AIR"/>
+      <solidref ref="TopSolid"/>
+      <physvol name="DetectorPhysVolume" copynumber="1">
+        <volumeref ref="ThickNaITubeSolidVolume"/>
+        <positionref ref="detPosition"/>
+      </physvol>
+    </volume>
+  </structure>
+
+  <setup name="default" version="1.0">
+    <world ref="Top"/>
+  </setup>
+
+</gdml>

@@ -1,0 +1,25 @@
+# 
+# can be run in batch, without graphic
+# or interactively: Idle> /control/execute run.mac
+#
+/control/verbose 2
+/run/verbose 2
+/event/verbose 2
+/tracking/verbose 2
+
+/tp/phys/addPhysics local
+/tp/histos/fileName out.root
+/tp/histos/nBinsE 200
+/tp/histos/minEnergy 0. MeV
+/tp/histos/maxEnergy 2. MeV
+
+#/tp/det/loadGeoGDML geometries/thin_cylinder_geometry.gdml
+
+#
+# initialize
+/run/initialize
+/run/setCut 1 nm
+#
+/gun/particle gamma
+/gun/energy 662 keV
+/run/beamOn 100

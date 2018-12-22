@@ -1,0 +1,38 @@
+#
+# can be run in batch, without graphic
+# or interactively: Idle> /control/execute run.mac
+#
+/control/verbose 0
+/run/verbose 2
+/event/verbose 0
+/tracking/verbose 0
+
+#/tp/phys/addPhysics standard
+
+/tp/generator/distrib disk
+
+/tp/histos/fileName out_thin_cylinder.root
+/tp/histos/nBinsE 200
+/tp/histos/minEnergy 0. MeV
+/tp/histos/maxEnergy 1. MeV
+
+/tp/det/loadGeoGDML geometries/thin_cylinder_geometry.gdml
+
+#
+# initialize
+/run/initialize
+/run/setCut 1 nm
+#
+/gun/particle gamma
+/gun/energy 662 keV
+# 137Cs
+#/gun/particle ion
+#/gun/ion 55 137
+
+#/run/beamOn 5
+
+
+#/tp/histos/fileName out_thick_cylinder.root
+#/tp/det/loadGeoGDML geometries/thick_cylinder_geometry.gdml
+
+/run/beamOn 100000
